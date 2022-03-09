@@ -1,5 +1,4 @@
 ## About the Project
-
 This project includes Selenium Python Scripts to Automate & Update Recruitment Posts for
 Life Commnications Group
 
@@ -17,31 +16,28 @@ List of frameworks/librarys used to create this project:
 To run the script, follow the steps below
 
 ### Prerequisites
-
 * [Google Chrome](https://www.google.com/chrome/)
 
 
 
 ### Installation
-
 Open the file `engage.py` and edit the lines below to match your chrome profile path.<br>
-*your chrome profile path can be found at [chrome://version/](chrome://version/)*
+*(your chrome profile path can be found at [chrome://version/](chrome://version/))*
 ```python
 options.add_argument('--user-data-dir=...')
 options.add_argument('--profile-directory=...')
 ```
 
+
+## Usage
 Run `engage.py`
 ```python
 py engage.py
 ```
 
-## Usage
-
 
 ## Contributing
-
-Contributions are greatly appreciated and welcomed!
+Contributions are welcomed and greatly appreciated!
 
 If you have any suggestions, please fork the repo and create a pull request or open an issue. 
 
