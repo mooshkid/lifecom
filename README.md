@@ -24,7 +24,7 @@ To run the script, follow the steps below
 
 ### Installation
 
-Open the file `engage.py` and edit the lines below to match your chrome profile path.
+Open the file `engage.py` and edit the lines below to match your chrome profile path.<br>
 _your chrome profile path can be found at [chrome://version](chrome://version)_
 ```python
 options.add_argument('--user-data-dir=...')
