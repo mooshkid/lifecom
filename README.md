@@ -4,9 +4,6 @@ This project includes Selenium Python Scripts to Automate & Update Recruitment P
 Life Commnications Group
 
 
-## Getting Started
-To run the script, follow the steps below
-
 ### Built With
 List of frameworks/librarys used in this project:
 
@@ -14,6 +11,10 @@ List of frameworks/librarys used in this project:
 * [Selenium](https://selenium-python.readthedocs.io/installation.html)
 * [ChromeDriver](https://chromedriver.chromium.org/downloads)
 
+
+
+## Getting Started
+To run the script, follow the steps below
 
 ### Prerequisites
 
