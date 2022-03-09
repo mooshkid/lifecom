@@ -17,8 +17,8 @@ To run the script, follow the steps below
 
 ### Prerequisites
 * [Google Chrome](https://www.google.com/chrome/)
-1. Create a new Google Profile
-2. Login to [https://en-gage.net/](https://en-gage.net/) and [https://employers.indeed.com/](https://employers.indeed.com/), and save the login details on chrome.
+1. Create a new profile on chrome.
+2. Save the login details to [https://en-gage.net/](https://en-gage.net/) and [https://employers.indeed.com/](https://employers.indeed.com/) on your new chrome profile.
 
 
 
