@@ -8,7 +8,7 @@ import pandas as pd
 import time
 
 #dataframes
-df = pd.read_excel(r'C:\Users\yamanaka\Documents\VSCode\coding\python\selenium\kosuke\engage.xlsx')
+df = pd.read_excel('engage.xlsx')
 #'job' column list
 job_list = df['job'].tolist()
 
