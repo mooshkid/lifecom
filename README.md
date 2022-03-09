@@ -3,7 +3,7 @@ This project includes Selenium Python Scripts to Automate & Update Recruitment P
 Life Commnications Group
 
 
-### Built With
+### Dependencies
 List of frameworks/librarys used to create this project:
 
 * [Python](https://www.python.org/downloads/)
@@ -23,7 +23,7 @@ To run the script, follow the steps below
 
 
 ### Installation
-Open the file `engage.py` and edit the lines below to match your chrome profile path.<br>
+Open the file `engage.py` and edit the lines below with our chrome profile path.<br>
 *(your chrome profile path can be found at [chrome://version/](chrome://version/))*
 ```python
 options.add_argument('--user-data-dir=...')
@@ -49,7 +49,8 @@ Thanks!
 ## License
 Distributed under the MOOSHKID License. See LICENSE.txt for more information.
 
-## Contact
+
+## Authors
 Masa Yamanaka - yamanaka@lcom-group.jp
 
 Project Link: [https://github.com/mooshkid/lifecom](https://github.com/mooshkid/lifecom)
