@@ -16,7 +16,8 @@ List of things required to run the python script.
 * [ChromeDriver](https://chromedriver.chromium.org/downloads)
 
 
-## Usage
+
+### Installation
 
 Open the file `engage.py` and edit the lines below to match your chrome profile path.
 _your chrome profile path can be found at [chrome://version](chrome://version)_
@@ -29,6 +30,9 @@ options.add_argument('--profile-directory=...')
 # run engage.py
 py engage.py
 ```
+
+## Usage
+
 
 ## Contributions
 
