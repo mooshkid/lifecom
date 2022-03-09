@@ -25,13 +25,13 @@ To run the script, follow the steps below
 ### Installation
 
 Open the file `engage.py` and edit the lines below to match your chrome profile path.<br>
-*your chrome profile path can be found at* [*chrome://version*](chrome://version)
+*your chrome profile path can be found at [chrome://version/](chrome://version/)*
 ```python
 options.add_argument('--user-data-dir=...')
 options.add_argument('--profile-directory=...')
 ```
 
-Run engage.py
+Run `engage.py`
 ```python
 py engage.py
 ```
@@ -48,4 +48,5 @@ Distributed under the MOOSHKID License. See LICENSE.txt for more information.
 
 ## Contact
 Masa Yamanaka - yamanaka@lcom-group.jp
+
 Project Link: [https://github.com/mooshkid/lifecom](https://github.com/mooshkid/lifecom)
