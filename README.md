@@ -5,7 +5,7 @@ Life Commnications Group
 
 
 ### Built With
-List of frameworks/librarys used in this project:
+List of frameworks/librarys used to create this project:
 
 * [Python](https://www.python.org/downloads/)
 * [Selenium](https://selenium-python.readthedocs.io/installation.html)
@@ -39,11 +39,12 @@ py engage.py
 ## Usage
 
 
-## Contributions
-
+## Contributing
+Contributions, issues and feature requests are welcome!
+Feel free to submit an issue or pull request to contribute :)
 
 ## License
-
+Distributed under the MOOSHKID License. See LICENSE.txt for more information.
 
 ## Contact
 Masa Yamanaka - yamanaka@lcom-group.jp
