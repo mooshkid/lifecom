@@ -40,8 +40,13 @@ py engage.py
 
 
 ## Contributing
-Contributions, issues and feature requests are welcome!
-Feel free to submit an issue or pull request to contribute :)
+
+Contributions are greatly appreciated and welcomed!
+
+If you have any suggestions, please fork the repo and create a pull request or open an issue. 
+
+Thanks!
+
 
 ## License
 Distributed under the MOOSHKID License. See LICENSE.txt for more information.
