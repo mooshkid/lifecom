@@ -7,13 +7,17 @@ Life Commnications Group
 ## Getting Started
 To run the script, follow the steps below
 
+### Built With
+List of frameworks/librarys used in this project:
 
-### Prerequisites
-List of things required to run the python script.
 * [Python](https://www.python.org/downloads/)
 * [Selenium](https://selenium-python.readthedocs.io/installation.html)
-* [Google Chrome](https://www.google.com/chrome/)
 * [ChromeDriver](https://chromedriver.chromium.org/downloads)
+
+
+### Prerequisites
+
+* [Google Chrome](https://www.google.com/chrome/)
 
 
 
