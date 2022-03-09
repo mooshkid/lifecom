@@ -22,12 +22,12 @@ List of things required to run the python script.
 Open the file `engage.py` and edit the lines below to match your chrome profile path.
 _your chrome profile path can be found at [chrome://version](chrome://version)_
 ```python
-options.add_argument('user-data-dir=...')
+options.add_argument('--user-data-dir=...')
 options.add_argument('--profile-directory=...')
 ```
 
+Run engage.py
 ```python
-# run engage.py
 py engage.py
 ```
 
@@ -41,4 +41,5 @@ py engage.py
 
 
 ## Contact
-me
+Masa Yamanaka - yamanaka@lcom-group.jp
+Project Link: [https://github.com/mooshkid/lifecom](https://github.com/mooshkid/lifecom)
