@@ -18,7 +18,9 @@ List of things required to run the python script.
 
 ## Usage
 
-Edit the `options.add_argument('user-data-dir=...')` path to your chrome profile dir. 
+Open engage.py and edit the line
+`options.add_argument('user-data-dir=...')` path to your chrome profile dir. 
+(your chrome profile path can be found at [chrome://version](chrome://version))
 
 ```python
 # run engage.py
