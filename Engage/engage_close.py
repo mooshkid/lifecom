@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 #dataframes
-df = pd.read_excel('python\selenium\kosuke\engage.xlsx')
+df = pd.read_excel('engage.xlsx')
 #'job' column list
 job_list = df['job'].tolist()
 

@@ -14,8 +14,8 @@ job_list = df['job'].tolist()
 
 #chrome options
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 8')
+options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
+options.add_argument('--profile-directory=Profile 8')   #change profile # as needed
 driver = webdriver.Chrome(options=options)
 
 #maximize browser
