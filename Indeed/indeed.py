@@ -74,7 +74,7 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
 
 #print elapsed time
 end = time.time()
-tt = end - start
-print('Task Completed in: ' + str(tt) + ' seconds')
+elapsed = end - start
+print('Task Completed in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
 
 driver.close()
