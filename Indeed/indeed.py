@@ -38,7 +38,7 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
         statusButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="downshift-0-toggle-button"]')))
         #close job
         statusButton.send_keys(Keys.ENTER + Keys.ARROW_DOWN + Keys.ARROW_DOWN + Keys.ARROW_DOWN + Keys.ENTER)
-        print('Closed...')
+        print('Closed')
 
         #close & switch tab
         driver.close()
