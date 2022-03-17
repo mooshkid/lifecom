@@ -1,16 +1,11 @@
+#### NO EXCEL VERSION ####
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
-import pandas as pd
 import time
-
-#dataframes
-df = pd.read_excel('engage_life.xlsx')
-#'job' column list
-job_list = df['job'].tolist()
 
 #chrome options
 options = webdriver.ChromeOptions()
@@ -27,14 +22,34 @@ driver.get("https://en-gage.net/company/job/?PK=D2B206")
 start = time.time()
 #loop counter
 count = 1
+#create empty list
+theList = []
 
-#start loop
-for i in job_list:
-    print('Starting(' + str(count) + '): ' + i)
+#filter by published
+publishedFilter = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')
+publishedFilter.click()
+#click filter button
+filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a').click()
 
-    #copy button
-    copyButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="md_pageTitle"]/a[2]')))
-    copyButton.click()
+
+#CREATE THE LIST
+div = driver.find_element(By.ID, 'jobIndexTable')
+table = div.find_element(By.CSS_SELECTOR, 'table')
+for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
+    for aTag in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(1) > div > a'):
+        jobTitle = aTag.text
+        theList.append(jobTitle)
+
+print(theList)
+print(str(len(theList)) + ' Open Jobs Found')
+
+
+#START LOOP
+#copy button
+copyButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="md_pageTitle"]/a[2]')))
+copyButton.click()
+for i in theList:
+    print('Starting(' +str(count) + '): ' + i)
     #search box
     searchBox = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="listParamFormEngage"]/div/input')))
     searchBox.clear()
@@ -42,6 +57,7 @@ for i in job_list:
     time.sleep(1)
     searchEnter = driver.find_element(By.XPATH, '//*[@id="listParamFormEngage"]/div/button')
     searchEnter.click()
+    time.sleep(2)
 
     #copy post
     time.sleep(2)
@@ -89,15 +105,16 @@ for i in job_list:
     noPremium.click()
 
     print('Copy Created')
-    
+
     #close popup
     #//*[@id="karte-9843225"]/div[2]/div/div/section/button
 
-    #START REMOVE
+
+    #START JOB CLOSE
     #search for post again
     searchBoxDelete = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[3]/div/span/input')
     searchBoxDelete.clear()
-    searchBoxDelete.send_keys(i)
+    searchBoxDelete.send_keys(jobTitle)
     #published filter
     published = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')
     published.click()
