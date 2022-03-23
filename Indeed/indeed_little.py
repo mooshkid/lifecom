@@ -7,7 +7,7 @@ import time
 import sys
 import logging
 
-#logging config
+#logging
 logging.basicConfig(
     level=logging.INFO,
     format=u'%(asctime)s [%(levelname)s] %(message)s',
@@ -17,7 +17,6 @@ logging.basicConfig(
     ]
 )
 
-# https://stackoverflow.com/questions/19425736/how-to-redirect-stdout-and-stderr-to-logger-in-python
 class LoggerWriter:
     def __init__(self, level):
         # self.level is really like using log.debug(message)
