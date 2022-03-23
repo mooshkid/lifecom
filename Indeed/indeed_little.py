@@ -4,6 +4,37 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import sys
+import logging
+
+#logging config
+logging.basicConfig(
+    level=logging.INFO,
+    format=u'%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler("C:\\Users\\yamanaka\\Documents\\VSCode\\lifecom\\Indeed\\logs.log", encoding='utf8'),
+        logging.StreamHandler()
+    ]
+)
+
+# https://stackoverflow.com/questions/19425736/how-to-redirect-stdout-and-stderr-to-logger-in-python
+class LoggerWriter:
+    def __init__(self, level):
+        # self.level is really like using log.debug(message)
+        # at least in my case
+        self.level = level
+
+    def write(self, message):
+        # if statement reduces the amount of newlines that are
+        # printed to the logger
+        if message != '\n':
+            self.level(message)
+
+    def flush(self): pass
+
+log = logging.getLogger(__name__)
+sys.stdout = LoggerWriter(log.debug)
+sys.stderr = LoggerWriter(log.error)
 
 #chrome options
 options = webdriver.ChromeOptions()
@@ -15,26 +46,31 @@ driver = webdriver.Chrome(options=options)
 driver.maximize_window()
 #launch URL
 driver.get("https://employers.indeed.com/j#cdjobs")
+time.sleep(5)
 
 #loop counter
-count = 1
+count = 0
 #start timer
 start = time.time()
 
-#start loop (64 posts)
+#find elements
 table = driver.find_element(By.ID, 'cdjobstab')
-for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
-    for aTag in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
-        print('Starting(' + str(count) + '):' + aTag.text)
-        count +=1
+rowCount = table.find_elements(By.CSS_SELECTOR, 'tr')
+log.info(str(int(len(rowCount)) - 1) + ' Job Listings Found')
+
+#start loop
+for rows in table.find_elements(By.CSS_SELECTOR, 'tr'):
+    for ahref in rows.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
+        count += 1
+        log.info('Starting(' + str(count) + '): ' + ahref.text)
 
         #open post in new tab
-        aTag.send_keys(Keys.CONTROL + Keys.ENTER)
+        ahref.send_keys(Keys.CONTROL + Keys.ENTER)
         #switch to tab1
         driver.switch_to.window(driver.window_handles[1])
 
         #status button
-        time.sleep(4)
+        time.sleep(5)
         statusButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="downshift-0-toggle-button"]')))
         #close job
         statusButton.send_keys(Keys.ENTER + Keys.ARROW_DOWN + Keys.ARROW_DOWN + Keys.ARROW_DOWN + Keys.ENTER)
@@ -46,7 +82,7 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
         time.sleep(1)
 
 
-    for label in row.find_elements(By.CSS_SELECTOR, 'td > label'):
+    for label in rows.find_elements(By.CSS_SELECTOR, 'td > label'):
         label.click()
 
         #copy button
@@ -72,9 +108,10 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
         driver.close()
         driver.switch_to.window(driver.window_handles[0])
 
+
 #print elapsed time
 end = time.time()
 elapsed = end - start
-print('Task Completed in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
+log.info('All ' + str(count) + ' Jobs Successfully Updated in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
 
 driver.close()

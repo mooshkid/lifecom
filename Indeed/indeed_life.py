@@ -21,7 +21,7 @@ count = 1
 #start timer
 start = time.time()
 
-#start loop (64 posts)
+#start loop
 table = driver.find_element(By.ID, 'cdjobstab')
 for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
     for aTag in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
