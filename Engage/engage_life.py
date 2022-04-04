@@ -6,16 +6,44 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 import pandas as pd
 import time
+import os
+import sys
+import logging
 
+#logging config
+path = os.getcwd()
+logPath = os.path.join(path, "logs/engage_life.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format=u'%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(logPath, encoding='utf8'),
+        logging.StreamHandler()
+    ]
+)
+class LoggerWriter:
+    def __init__(self, level):
+        self.level = level
+    def write(self, message):
+        if message != '\n':
+            self.level(message)
+    def flush(self): pass
+log = logging.getLogger(__name__)
+sys.stdout = LoggerWriter(log.debug)
+sys.stderr = LoggerWriter(log.error)
+
+#excel path
+excelPath = os.path.join(path, 'Engage/engage_life.xlsx')
 #dataframes
-df = pd.read_excel('engage_life.xlsx')
+df = pd.read_excel(excelPath)
 #'job' column list
 job_list = df['job'].tolist()
 
 #chrome options
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
-options.add_argument('--profile-directory=Profile 8')   #change profile # as needed
+options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 8')
 driver = webdriver.Chrome(options=options)
 
 #maximize browser
@@ -30,7 +58,7 @@ count = 1
 
 #start loop
 for i in job_list:
-    print('Starting(' + str(count) + '): ' + i)
+    log.info('Starting(' + str(count) + '): ' + i)
 
     #copy button
     copyButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="md_pageTitle"]/a[2]')))
@@ -45,7 +73,7 @@ for i in job_list:
 
     #copy post
     time.sleep(2)
-    copyButton = driver.find_element(By.XPATH, '/html/body/div[8]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[4]/a')
+    copyButton = driver.find_element(By.XPATH, '/html/body/div[8]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[5]/a')
     copyButton.click()
 
     #overtime (only for fulltime)
@@ -85,22 +113,22 @@ for i in job_list:
     nextButton.click()
 
     #skip premium
-    noPremium = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobFormBase"]/a[1]')))
+    noPremium = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobFormBase"]/div[2]/a')))
     noPremium.click()
 
-    print('Copy Created')
+    log.info('Copy Created')
     
     #close popup
     #//*[@id="karte-9843225"]/div[2]/div/div/section/button
 
-    #START REMOVE
+    #START CLOSE
+    #published filter
+    published = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')
+    published.click()
     #search for post again
     searchBoxDelete = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[3]/div/span/input')
     searchBoxDelete.clear()
     searchBoxDelete.send_keys(i)
-    #published filter
-    published = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')
-    published.click()
     #filter
     filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a')
     filterButton.click()
@@ -116,12 +144,12 @@ for i in job_list:
     send = driver.find_element(By.XPATH, '//*[@id="stopModalForm"]/div/div/div[2]/a[2]')
     send.click()
 
-    print('Closed Original Post')
+    log.info('Closed Original Post')
     count += 1
 
 #elapsed time
 end = time.time()
 elapsed = end - start
-print('All ' + str(count) + ' Tasks Completed Successfully in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
+log.info('All ' + str(count) + ' Tasks Completed Successfully in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
 
 driver.close()

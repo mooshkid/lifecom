@@ -63,7 +63,7 @@ log.info(theList)
 log.info('Closing All Jobs')
 selectAll = driver.find_element(By.XPATH, '//*[@id="cdjobstab"]/div[3]/div/table/thead/tr/th[1]/label').click()
 changeStatusButton = driver.find_element(By.XPATH, '//*[@id="BulkUpdateStatusMenuButton"]').click()
-closeAll = driver.find_element(By.XPATH, '//*[@id="option-2--menu--2"]')
+closeAll = driver.find_element(By.XPATH, '//*[@id="option-2--menu--2"]')    #  //*[@id="option-2--menu--6"]
 closeAll.click()
 time.sleep(1)
 
