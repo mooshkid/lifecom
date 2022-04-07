@@ -31,10 +31,9 @@ sys.stderr = LoggerWriter(log.error)
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 options.add_argument('--profile-directory=Profile 9')
+options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
-#maximize browser
-driver.maximize_window()
 #launch URL
 driver.get("https://employers.indeed.com/j#cdjobs") #tab for copying
 driver.execute_script("window.open('https://employers.indeed.com/j#cdjobs');") #tab for closing

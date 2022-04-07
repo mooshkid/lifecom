@@ -16,10 +16,9 @@ job_list = df['job'].tolist()
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
 options.add_argument('--profile-directory=Profile 8')   #change profile # as needed
+options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
-#maximize browser
-driver.maximize_window()
 #launch URL
 driver.get("https://en-gage.net/company/job/?PK=5AEE24")
 
