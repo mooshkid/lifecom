@@ -103,6 +103,6 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
 #print elapsed time
 end = time.time()
 elapsed = end - start
-log.info('Task Completed in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
+log.info('All ' + str(count) + ' Tasks Completed in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
 
 driver.close()

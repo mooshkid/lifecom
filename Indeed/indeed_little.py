@@ -3,16 +3,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 import time
 import sys
 import logging
 
 #logging config
+path = os.getcwd()
+logPath = os.path.join(path, "logs/indeed_little.log")
+
 logging.basicConfig(
     level=logging.INFO,
     format=u'%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
-        logging.FileHandler("C:\\Users\\yamanaka\\Documents\\VSCode\\lifecom\\Indeed\\logs.log", encoding='utf8'),
+        logging.FileHandler(logPath, encoding='utf8'),
         logging.StreamHandler()
     ]
 )
