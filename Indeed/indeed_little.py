@@ -39,51 +39,58 @@ options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 #launch URL
-driver.get("https://employers.indeed.com/j#cdjobs") #tab for copying
-driver.execute_script("window.open('https://employers.indeed.com/j#cdjobs');") #tab for closing
-driver.switch_to.window(driver.window_handles[1])
-time.sleep(6)
+driver.get("https://employers.indeed.com/j#cdjobs") 
 
 #loop counter
 count = 0
 #start timer
 start = time.time()
-#create empty list
-theList = []
+
+#sort date by asc
+sortDate = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="cdjobstab"]/div[3]/div/table/thead/tr/th[4]/button'))).click()
+time.sleep(2)
 
 #find number of open jobs
-rows = driver.find_elements(By.XPATH, '//*[@id="cdjobstab"]/div[3]/div/table/tbody/tr')
+rows = WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.XPATH, '//*[@id="cdjobstab"]/div[3]/div/table/tbody/tr')))
 jobCount = len(rows)
 log.info(str(jobCount) + ' Open Job Listings Found')
-#print list of all open jobs
+
+#start loop
 for row in rows:
-    for ahref in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
-        jobTitle = ahref.text
-        theList.append(jobTitle)
-log.info(theList)
+    for aTag in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
+        count +=1
+        log.info('Starting(' + str(count) + '): ' + aTag.text)
 
-#CLOSE all open jobs
-log.info('Closing All Jobs')
-selectAll = driver.find_element(By.XPATH, '//*[@id="cdjobstab"]/div[3]/div/table/thead/tr/th[1]/label').click()
-changeStatusButton = driver.find_element(By.XPATH, '//*[@id="BulkUpdateStatusMenuButton"]').click()
-closeAll = driver.find_element(By.XPATH, '//*[@id="option-2--menu--2"]')    #  //*[@id="option-2--menu--6"]
-closeAll.click()
-time.sleep(1)
+        #open post in new tab
+        aTag.send_keys(Keys.CONTROL + Keys.ENTER)
+        #switch to tab1
+        driver.switch_to.window(driver.window_handles[1])
 
-driver.switch_to.alert.accept() #driver.switch_to.alert.dismiss()
-log.info('Closed All Jobs')
-time.sleep(1)
+        #status button
+        time.sleep(4)
+        statusButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="downshift-0-toggle-button"]')))
+        statusButton.click()
+        #close job
+        closeJob = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="downshift-0-item-2"]')))
+        closeJob.click()
+        #reason
+        reasonOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[1]/fieldset/label[3]')))
+        reasonOne.click()
+        #click next
+        clickNext = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
+        #reason 2
+        reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[1]/ul/li[5]/label')))
+        reasonTwo.click()
+        #click confirm
+        clickConfirm = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[2]/button[2]').click()
+        log.info('Closed')
 
-#close & switch tab
-driver.close()
-driver.switch_to.window(driver.window_handles[0])
+        #close & switch tab
+        driver.close()
+        driver.switch_to.window(driver.window_handles[0])
+        time.sleep(1)
 
-#START Copying
-for row in rows:
-    for ahref in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(2) > a'):
-        jobTitle = ahref.text
-        count += 1
-        log.info('Starting(' + str(count) + '): ' + jobTitle)
+    # Duplicate loop    
     for label in row.find_elements(By.CSS_SELECTOR, 'td > label'):
         label.click()
 
@@ -96,15 +103,42 @@ for row in rows:
         #switch to tab1
         driver.switch_to.window(driver.window_handles[1])
 
-        #confirm button
-        time.sleep(1)
-        confirmButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="confirm-button-in-preview"]')))
-        confirmButton.click()
+        ##### NEW PART #######
+        #next button 1
+        nextButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
+        nextButton.click()
+        #next again 2
+        time.sleep(2)
+        hireOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(1) select > option:nth-child(2)'))).click()
+        hireTwo = driver.find_element(By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(2) select > option:nth-child(4)').click()
+        nextButton2 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
+        nextButton2.click()
+        #next again 3
+        time.sleep(2)
+        nextButton3 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
+        nextButton3.click()
+        #next again 4
+        time.sleep(2)
+        nextButton4 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
+        nextButton4.click()
+        #next again 5
+        time.sleep(2)
+        nextButton5 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
+        nextButton5.click()
+        #next again 6
+        time.sleep(2)
+        nextButton6 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
+        nextButton6.click()
+        #next again 7
+        time.sleep(2)
+        nextButton7 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
+        nextButton7.click()
 
-        #don't optimize
-        noOptimize = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="uniqueId1"]')))
-        noOptimize.click()
-        log.info('Finished.')
+        #unpaidOption 8
+        unpaidOption = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/div/div[3]/button[1]')))
+        unpaidOption.click()
+        log.info('Finished')
+        time.sleep(1)
 
         #close & switch tab
         driver.close()
