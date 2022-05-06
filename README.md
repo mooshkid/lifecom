@@ -19,7 +19,7 @@ To run the script, follow the steps below
 * [Google Chrome](https://www.google.com/chrome/)
 1. Create a new profile on chrome.
 2. Save the login details for [https://en-gage.net/](https://en-gage.net/) and [https://employers.indeed.com/](https://employers.indeed.com/) on your new chrome profile.
-*(for Indeed, follow the same steps but replace engage_life.py with indeed_life.py)*
+*(for Indeed, follow the same steps below but replace engage_life.py with indeed_life.py)*
 
 
 

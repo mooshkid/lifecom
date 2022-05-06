@@ -74,16 +74,17 @@ for row in rows:
         closeJob = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="downshift-0-item-2"]')))
         closeJob.click()
         #reason
-        reasonOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[1]/fieldset/label[3]')))
+        reasonOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="billingOrTechnicalIssue"]/ancestor::label')))
         reasonOne.click()
         #click next
-        clickNext = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
+        clickNext = driver.find_element(By.CLASS_NAME, 'continue-btn').click()
         #reason 2
-        reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[1]/ul/li[5]/label')))
+        reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.question-content > ul > li:nth-child(5)')))
         reasonTwo.click()
         #click confirm
-        clickConfirm = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[2]/button[2]').click()
+        clickConfirm = driver.find_element(By.CSS_SELECTOR, 'div.button-and-link-container > button:nth-child(2)').click()
         log.info('Closed')
+        time.sleep(1)
 
         #close & switch tab
         driver.close()

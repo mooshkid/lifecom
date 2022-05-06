@@ -32,9 +32,6 @@ filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/
 
 
 #CREATE THE LIST
-
-#div = driver.find_element(By.ID, 'jobIndexTable')
-#table = div.find_element(By.CSS_SELECTOR, 'table')
 time.sleep(2)
 table = driver.find_element(By.XPATH, '//*[@id="jobIndexTable"]/table')
 for row in table.find_elements(By.CSS_SELECTOR, 'tr'):

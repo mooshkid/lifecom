@@ -15,6 +15,7 @@ import logging
 #logging config
 path = os.getcwd()
 logPath = os.path.join(path, "logs/indeed_life.log")
+#logPath = os.path.expanduser('~/Documents/Logs/indeed_life.log')
 
 logging.basicConfig(
     level=logging.INFO,
