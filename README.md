@@ -18,12 +18,13 @@ To run the script, follow the steps below
 ### Prerequisites
 * [Google Chrome](https://www.google.com/chrome/)
 1. Create a new profile on chrome.
-2. Save the login details to [https://en-gage.net/](https://en-gage.net/) and [https://employers.indeed.com/](https://employers.indeed.com/) on your new chrome profile.
+2. Save the login details for [https://en-gage.net/](https://en-gage.net/) and [https://employers.indeed.com/](https://employers.indeed.com/) on your new chrome profile.
 
 
 
 ### Installation
-Open the file `engage.py` and edit the lines below with our chrome profile path.<br>
+Open `engage_life.py` in an editor and find the #Chrome Options section. 
+Then, edit the 2 lines to match your own chrome profile path.<br>
 *(your chrome profile path can be found at [chrome://version/](chrome://version/))*
 ```python
 options.add_argument('--user-data-dir=...')
