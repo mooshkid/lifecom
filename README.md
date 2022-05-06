@@ -23,8 +23,7 @@ To run the script, follow the steps below
 
 
 ### Installation
-Open `engage_life.py` in an editor and find the `#chrome options` section. <br>
-Then, edit the 2 lines to match your own chrome profile path.<br>
+Open `engage_life.py` in an editor. Find the `#chrome options` section and edit the 2 lines to match your own chrome profile path.<br>
 *(your chrome profile path can be found at [chrome://version/](chrome://version/))*
 ```python
 options.add_argument('--user-data-dir=...')
