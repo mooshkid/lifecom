@@ -21,7 +21,7 @@ driver.get("https://en-gage.net/company/job/?PK=D2B206")
 start = time.time()
 #loop counter
 count = 0
-#create empty list
+#create an empty list
 theList = []
 
 #filter by published
@@ -41,7 +41,6 @@ for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
 
 print(theList)
 print(str(len(theList)) + ' Open Jobs Found')
-
 
 
 #START LOOP
