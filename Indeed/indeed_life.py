@@ -40,6 +40,8 @@ sys.stderr = LoggerWriter(log.error)
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 options.add_argument('--profile-directory=Profile 8')
+#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+#options.add_argument('--profile-directory=Profile 3')
 options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
@@ -150,10 +152,14 @@ for row in rows:
     time.sleep(2)
     nextButton6 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
     nextButton6.click()
+
     #next again 7
-    time.sleep(2)
-    nextButton7 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
-    nextButton7.click()
+    try:
+        time.sleep(2)
+        nextButton7 = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
+        nextButton7.click()
+    except TimeoutException:
+        pass
 
     #unpaidOption 8
     unpaidOption = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/div/div[3]/button[1]')))
