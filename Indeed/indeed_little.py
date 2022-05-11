@@ -113,20 +113,25 @@ for row in rows:
     nextButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton.click()
     #next again 2
+    time.sleep(2)
     hireOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(1) select > option:nth-child(2)'))).click()
     hireTwo = driver.find_element(By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(2) select > option:nth-child(4)').click()
     nextButton2 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton2.click()
     #next again 3
+    time.sleep(2)
     nextButton3 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton3.click()
     #next again 4
+    time.sleep(2)
     nextButton4 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton4.click()
     #next again 5
+    time.sleep(2)
     nextButton5 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton5.click()
     #next again 6
+    time.sleep(2)
     nextButton6 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[4]/div/div/div/div[2]/div[2]/button')))
     nextButton6.click()
 
