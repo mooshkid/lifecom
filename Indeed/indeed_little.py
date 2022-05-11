@@ -12,7 +12,7 @@ import logging
 #logging config
 path = os.getcwd()
 logPath = os.path.join(path, "logs/indeed_little.log")
-#logPath = os.path.expanduser('~/Documents/Python/Lifecom/Logs/indeed_little.log')
+#logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_little.log')
 
 logging.basicConfig(
     level=logging.INFO,
@@ -37,6 +37,8 @@ sys.stderr = LoggerWriter(log.error)
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 options.add_argument('--profile-directory=Profile 9')
+#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+#options.add_argument('--profile-directory=Profile 1')
 options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
@@ -79,9 +81,9 @@ for row in rows:
     reasonOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="billingOrTechnicalIssue"]/ancestor::label')))
     reasonOne.click()
     #click next
-    clickNext = driver.find_element(By.CLASS_NAME, 'continue-btn').click()
+    clickNext = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
     #reason 2
-    reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.question-content > ul > li:nth-child(5)')))
+    reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.question-content > ul > li:nth-child(5) > label')))
     reasonTwo.click()
     #click confirm
     clickConfirm = driver.find_element(By.CSS_SELECTOR, 'div.button-and-link-container > button:nth-child(2)').click()

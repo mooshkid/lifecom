@@ -1,4 +1,4 @@
-## Working as of 4/26/2022
+## Working as of 5/11/2022
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,7 +15,7 @@ import logging
 #logging config
 path = os.getcwd()
 logPath = os.path.join(path, "logs/indeed_life.log")
-#logPath = os.path.expanduser('~/Documents/Logs/indeed_life.log')
+#logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_life.log')
 
 logging.basicConfig(
     level=logging.INFO,
