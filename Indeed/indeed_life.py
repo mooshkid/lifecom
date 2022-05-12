@@ -14,8 +14,8 @@ import logging
 
 #logging config
 path = os.getcwd()
-logPath = os.path.join(path, "logs/indeed_life.log")
-#logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_life.log')
+logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_life.log')
+#logPath = os.path.join(path, "logs/indeed_life.log")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -38,11 +38,11 @@ sys.stderr = LoggerWriter(log.error)
 
 #chrome options
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 8')
-#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-#options.add_argument('--profile-directory=Profile 3')
-options.add_argument("start-maximized")
+options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 3')
+#options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+#options.add_argument('--profile-directory=Profile 8')
+#options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 #launch URL

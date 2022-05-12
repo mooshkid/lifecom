@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException
 import os
 import time
 import sys
@@ -11,8 +12,8 @@ import logging
 
 #logging config
 path = os.getcwd()
-logPath = os.path.join(path, "logs/indeed_little.log")
-#logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_little.log')
+logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_little.log')
+#logPath = os.path.join(path, "logs/indeed_little.log")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -35,11 +36,11 @@ sys.stderr = LoggerWriter(log.error)
 
 #chrome options
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 9')
-#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-#options.add_argument('--profile-directory=Profile 1')
-options.add_argument("start-maximized")
+options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 1')
+#options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+#options.add_argument('--profile-directory=Profile 9')
+#options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 #launch URL
@@ -81,12 +82,21 @@ for row in rows:
     reasonOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="billingOrTechnicalIssue"]/ancestor::label')))
     reasonOne.click()
     #click next
-    clickNext = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
+    try:
+        clickNext = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
+    except NoSuchElementException:
+        clickNext = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div/div/div[2]/div[2]/button[2]').click()
     #reason 2
-    reasonTwo = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.question-content > ul > li:nth-child(5) > label')))
-    reasonTwo.click()
+    time.sleep(2)
+    try:
+        reasonTwo = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[1]/ul/li[5]/label').click()
+    except NoSuchElementException:
+        reasonTwo = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div/div/div[3]/div[1]/ul/li[5]/label').click()
     #click confirm
-    clickConfirm = driver.find_element(By.CSS_SELECTOR, 'div.button-and-link-container > button:nth-child(2)').click()
+    try:
+        clickConfirm = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div[2]/div/div/div[3]/div[2]/button[2]').click()
+    except NoSuchElementException:
+        clickConfirm = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div/div/div[3]/div[2]/button[2]').click()
     log.info('Closed')
     time.sleep(1)
 
@@ -95,7 +105,8 @@ for row in rows:
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(1)
 
-    # Duplicate loop    
+
+    ### Duplicate loop ###
     for label in row.find_elements(By.CSS_SELECTOR, 'td > label'):
         label.click()
 
@@ -108,7 +119,7 @@ for row in rows:
     #switch to tab1
     driver.switch_to.window(driver.window_handles[1])
 
-    ##### NEW PART #######
+    ##### NEW PART #####
     #next button 1
     nextButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton.click()
