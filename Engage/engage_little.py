@@ -1,3 +1,6 @@
+### NEED MAJOR REVISION ###
+### Website has been revised
+### 5/30/2022 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
