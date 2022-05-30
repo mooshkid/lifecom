@@ -1,4 +1,6 @@
 #### NO EXCEL VERSION ####
+## 5/12/2022
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -7,10 +9,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 import time
 
-#chrome options
+#chrome options (change path to your chrome profile!!! chrome://version/)
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
-options.add_argument('--profile-directory=Profile 8')   #change profile # as needed
+#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+#options.add_argument('--profile-directory=Default')
+options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 8')
 options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
@@ -29,7 +33,9 @@ publishedFilter = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By
 publishedFilter.click()
 #click filter button
 filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a').click()
-
+#sort by date ascending
+sortDate = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobIndexTable"]/table/thead/tr/th[3]/a')))
+sortDate.click()
 
 #CREATE THE LIST
 time.sleep(2)
@@ -99,6 +105,7 @@ for i in theList:
     confirmChanges = driver.find_element(By.XPATH, '//*[@id="jobMakeFormButton"]/a')
     confirmChanges.click()
     #next
+    time.sleep(2)
     nextButton = driver.find_element(By.XPATH, '//*[@id="jobMakeFormButton"]/div/a[2]')
     nextButton.click()
 
