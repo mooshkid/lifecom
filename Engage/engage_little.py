@@ -8,14 +8,14 @@ import pandas as pd
 import time
 
 #dataframes
-df = pd.read_excel('engage.xlsx')
+df = pd.read_excel('Engage/engage_little.xlsx')
 #'job' column list
 job_list = df['job'].tolist()
 
 #chrome options
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
-options.add_argument('--profile-directory=Profile 8')   #change profile # as needed
+options.add_argument('--profile-directory=Profile 9')   #change profile # as needed
 options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
@@ -27,6 +27,13 @@ start = time.time()
 #loop counter
 count = 1
 
+#filter by published
+publishedFilter = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')))
+publishedFilter.click()
+#click filter button
+filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a').click()
+
+
 #start loop
 for i in job_list:
     print('Starting(' + str(count) + '): ' + i)
@@ -35,6 +42,7 @@ for i in job_list:
     copyButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="md_pageTitle"]/a[2]')))
     copyButton.click()
     #search box
+    time.sleep(2)
     searchBox = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="listParamFormEngage"]/div/input')))
     searchBox.clear()
     searchBox.send_keys(i)
@@ -44,7 +52,7 @@ for i in job_list:
 
     #copy post
     time.sleep(2)
-    copyButton = driver.find_element(By.XPATH, '/html/body/div[8]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[4]/a')
+    copyButton = driver.find_element(By.XPATH, '/html/body/div[8]/div/div[2]/div/div[1]/table/tbody/tr[1]/td[5]/a')
     copyButton.click()
 
     #overtime (only for fulltime)
@@ -87,10 +95,36 @@ for i in job_list:
     noPremium = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobFormBase"]/div[2]/a')))
     noPremium.click()
 
-    print('Finished')
+    print('Copy Created')
     count += 1
     #close popup
     #//*[@id="karte-9843225"]/div[2]/div/div/section/button
+
+    #START JOB CLOSE
+    #search for post again
+    searchBoxDelete = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[3]/div/span/input')
+    searchBoxDelete.clear()
+    searchBoxDelete.send_keys(i)
+    #published filter
+    published = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')
+    published.click()
+    #filter
+    filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a')
+    filterButton.click()
+
+    #unpublish
+    time.sleep(2)
+    unpublish = driver.find_element(By.XPATH, '//*[@id="jobIndexTable"]/table/tbody/tr[2]/td[6]/span/select/option[2]')
+    unpublish.click()
+
+    #select reason
+    reason = driver.find_element(By.XPATH, '//*[@id="stopModalForm"]/div/div/div[1]/dl/dd/div/div[6]/label')
+    reason.click()
+    #click send
+    send = driver.find_element(By.XPATH, '//*[@id="stopModalForm"]/div/div/div[2]/a[2]')
+    send.click()
+
+    print('Closed Original Post')
 
 #elapsed time
 end = time.time()
