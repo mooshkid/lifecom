@@ -14,7 +14,7 @@ import logging
 
 #logging config
 path = os.getcwd()
-logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_life.log')
+logPath = os.path.expanduser('~/Documents/VSCode/Lifecom/Logs/indeed_life.log')
 #logPath = os.path.join(path, "logs/indeed_life.log")
 
 logging.basicConfig(
