@@ -14,7 +14,7 @@ import logging
 
 #logging config
 path = os.getcwd()
-logPath = os.path.expanduser('~/Documents/Python/Logs/indeed_little.log')
+logPath = os.path.expanduser('~/Documents/VSCode/Lifecom/Logs/indeed_little.log')
 #logPath = os.path.join(path, "logs/indeed_little.log")
 
 logging.basicConfig(
@@ -39,7 +39,7 @@ sys.stderr = LoggerWriter(log.error)
 #chrome options
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 1')
+options.add_argument('--profile-directory=Profile 2')
 #options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 #options.add_argument('--profile-directory=Profile 9')
 #options.add_argument("start-maximized")
