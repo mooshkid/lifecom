@@ -1,6 +1,5 @@
 ### Updated 6/14/2022 
 
-from itertools import count
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,9 +11,11 @@ import time
 
 # chrome options 
 options = webdriver.ChromeOptions()
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 9')
-options.add_argument("start-maximized")
+options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 2')
+# options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+# options.add_argument('--profile-directory=Profile 9')
+# options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 # launch URL 
@@ -56,7 +57,8 @@ for i in range(int(totalPosts)):
     sortDate = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobIndexTable"]/table/thead/tr/th[3]/a'))).click()
 
     # find the elements
-    table = driver.find_element(By.XPATH, '//*[@id="jobIndexTable"]/table/tbody')
+    time.sleep(2)
+    table = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobIndexTable"]/table/tbody')))
     rows = table.find_element(By.CSS_SELECTOR, 'tr')
     # print title 
     title = rows.find_element(By.CSS_SELECTOR, 'td:nth-child(1) > div > a')
