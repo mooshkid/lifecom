@@ -1,71 +1,57 @@
-#### NO EXCEL VERSION ####
-## 5/12/2022
-
+### NEED MAJOR REVISION ###
+### Website has been revised
+### 5/30/2022 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
+import pandas as pd
 import time
 
-#chrome options (change path to your chrome profile!!! chrome://version/)
+#dataframes
+df = pd.read_excel('Engage/engage_little.xlsx')
+#'job' column list
+job_list = df['job'].tolist()
+
+#chrome options
 options = webdriver.ChromeOptions()
-#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-#options.add_argument('--profile-directory=Default')
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 8')
+options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')  #change path to your chrome profile (chrome://version/)
+options.add_argument('--profile-directory=Profile 9')   #change profile # as needed
 options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 #launch URL
-driver.get("https://en-gage.net/company/job/?PK=D2B206")
+driver.get("https://en-gage.net/company/job/?PK=5AEE24")
 
 #start time
 start = time.time()
 #loop counter
-count = 0
-#create an empty list
-theList = []
+count = 1
 
 #filter by published
 publishedFilter = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="conditionForm"]/ul/li[2]/div[2]/span/select/option[2]')))
 publishedFilter.click()
 #click filter button
 filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a').click()
-#sort by date ascending
-sortDate = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobIndexTable"]/table/thead/tr/th[3]/a')))
-sortDate.click()
-
-#CREATE THE LIST
-time.sleep(2)
-table = driver.find_element(By.XPATH, '//*[@id="jobIndexTable"]/table')
-for row in table.find_elements(By.CSS_SELECTOR, 'tr'):
-    for aTag in row.find_elements(By.CSS_SELECTOR, 'td:nth-child(1) > div > a'):
-        jobTitle = aTag.text
-        theList.append(jobTitle)
-
-print(theList)
-print(str(len(theList)) + ' Open Jobs Found')
 
 
-#START LOOP
-for i in theList:
+#start loop
+for i in job_list:
+    print('Starting(' + str(count) + '): ' + i)
+
     #copy button
-    copyButton = driver.find_element(By.XPATH, '//*[@id="md_pageTitle"]/a[2]')
+    copyButton = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="md_pageTitle"]/a[2]')))
     copyButton.click()
-
-    count += 1
-    print('Starting(' +str(count) + '): ' + i)
-
     #search box
+    time.sleep(2)
     searchBox = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="listParamFormEngage"]/div/input')))
     searchBox.clear()
     searchBox.send_keys(i)
     time.sleep(1)
     searchEnter = driver.find_element(By.XPATH, '//*[@id="listParamFormEngage"]/div/button')
     searchEnter.click()
-    time.sleep(2)
 
     #copy post
     time.sleep(2)
@@ -105,7 +91,6 @@ for i in theList:
     confirmChanges = driver.find_element(By.XPATH, '//*[@id="jobMakeFormButton"]/a')
     confirmChanges.click()
     #next
-    time.sleep(2)
     nextButton = driver.find_element(By.XPATH, '//*[@id="jobMakeFormButton"]/div/a[2]')
     nextButton.click()
 
@@ -114,10 +99,9 @@ for i in theList:
     noPremium.click()
 
     print('Copy Created')
-
+    count += 1
     #close popup
     #//*[@id="karte-9843225"]/div[2]/div/div/section/button
-
 
     #START JOB CLOSE
     #search for post again
@@ -147,7 +131,7 @@ for i in theList:
 
 #elapsed time
 end = time.time()
-elapsed = end - start
-print('All ' + str(count) + ' Tasks Completed Successfully in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
+tt = end - start
+print('Completed in: ' + str(tt) + ' seconds')
 
 driver.close()
