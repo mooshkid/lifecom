@@ -7,6 +7,33 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 from selenium.common.exceptions import NoSuchElementException
 import time
+import os
+import sys
+import logging
+
+
+# logging config
+path = os.getcwd()
+logFile = os.path.join(path, "Logs/engage_little.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format=u'%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(logFile, encoding='utf8', mode='a'),
+        logging.StreamHandler()
+    ]
+)
+class LoggerWriter:
+    def __init__(self, level):
+        self.level = level
+    def write(self, message):
+        if message != '\n':
+            self.level(message)
+    def flush(self): pass
+log = logging.getLogger(__name__)
+sys.stdout = LoggerWriter(log.debug)
+sys.stderr = LoggerWriter(log.error)
 
 
 # chrome options 
@@ -40,7 +67,7 @@ publishedFilter.click()
 filterButton = driver.find_element(By.XPATH, '//*[@id="conditionForm"]/ul/li[4]/div/a').click()
 # total published posts 
 totalPosts = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobIndexTable"]/div[1]/div[1]/em'))).text
-print('There are ' + totalPosts + ' Published Posts')
+log.info('There are ' + totalPosts + ' Published Posts')
 
 
 ### Start the loop ###
@@ -62,7 +89,7 @@ for i in range(int(totalPosts)):
     rows = table.find_element(By.CSS_SELECTOR, 'tr')
     # print title 
     title = rows.find_element(By.CSS_SELECTOR, 'td:nth-child(1) > div > a')
-    print('Starting(' + str(count) + '): ' + title.text)
+    log.info('Starting(' + str(count) + '): ' + title.text)
 
 
     ### CLOSE ORIGINAL POST ###
@@ -73,14 +100,14 @@ for i in range(int(totalPosts)):
     reason = driver.find_element(By.XPATH, '//*[@id="stopModalForm"]/div/div/div[1]/dl/dd/div/div[6]/label').click()
     # click send 
     send = driver.find_element(By.XPATH, '//*[@id="stopModalForm"]/div/div/div[2]/a[2]').click()
-    print('Closed Original Post')
+    log.info('Closed Original Post')
 
 
     ### COPY ORIGINAL POST ###
     time.sleep(2)
-    print('Creating Copy')
+    log.info('Creating Copy')
     # click copy 
-    rows.find_element(By.CSS_SELECTOR, 'td:nth-of-type(1) > a:nth-of-type(2)').click()
+    WebDriverWait(rows, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'td:nth-of-type(1) > a:nth-of-type(2)'))).click()
 
     #overtime (only for fulltime)
     try:
@@ -124,11 +151,11 @@ for i in range(int(totalPosts)):
     noPremium = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="jobFormBase"]/div[2]/a')))
     noPremium.click()
 
-    print('Copy Created')
+    log.info('Copy Created')
 
 #elapsed time
 end = time.time()
 elapsed = end - start
-print('All ' + str(count) + ' Tasks Completed Successfully in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
+log.info('All ' + str(count) + ' Tasks Completed Successfully in: ' + time.strftime('%H:%M:%S', time.gmtime(elapsed)))
 
 driver.close()
