@@ -1,5 +1,6 @@
 #### NO EXCEL VERSION ####
 ## 5/12/2022
+## SHOULD UPDATE TO THE LITTLE GARDEN VERSION
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,6 +9,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 import time
+import os
+
+# change cwd to the script directory 
+os.chdir(os.path.dirname(__file__))
+path = os.getcwd()
+print(path)
 
 #chrome options (change path to your chrome profile!!! chrome://version/)
 options = webdriver.ChromeOptions()
