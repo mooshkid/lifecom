@@ -12,8 +12,10 @@ import sys
 import logging
 
 
-# logging config
+# change cwd to the script directory 
+os.chdir(os.path.dirname(__file__))
 path = os.getcwd()
+# logging config
 logFile = os.path.join(path, "Logs/engage_little.log")
 
 logging.basicConfig(
