@@ -15,9 +15,10 @@ import logging
 # change cwd to the script directory 
 os.chdir(os.path.dirname(__file__))
 path = os.getcwd()
-# logging config
-logFile = os.path.join(path, "../Logs/indeed_life.log")
 
+# log file path
+logPath = os.path.join(path, "../Logs/indeed_life.log")
+# logging config 
 logging.basicConfig(
     level=logging.INFO,
     format=u'%(asctime)s [%(levelname)s] %(message)s',
