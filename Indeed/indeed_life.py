@@ -12,10 +12,11 @@ import time
 import sys
 import logging
 
-#logging config
+# change cwd to the script directory 
+os.chdir(os.path.dirname(__file__))
 path = os.getcwd()
-logPath = os.path.expanduser('~/Documents/VSCode/Lifecom/Logs/indeed_life.log')
-#logPath = os.path.join(path, "logs/indeed_life.log")
+# logging config
+logFile = os.path.join(path, "Logs/indeed_life.log")
 
 logging.basicConfig(
     level=logging.INFO,
