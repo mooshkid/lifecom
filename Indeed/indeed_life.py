@@ -16,7 +16,7 @@ import logging
 os.chdir(os.path.dirname(__file__))
 path = os.getcwd()
 # logging config
-logFile = os.path.join(path, "Logs/indeed_life.log")
+logFile = os.path.join(path, "../Logs/indeed_life.log")
 
 logging.basicConfig(
     level=logging.INFO,
