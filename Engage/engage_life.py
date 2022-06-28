@@ -18,11 +18,11 @@ print(path)
 
 #chrome options (change path to your chrome profile!!! chrome://version/)
 options = webdriver.ChromeOptions()
-#options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-#options.add_argument('--profile-directory=Default')
-options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 8')
-options.add_argument("start-maximized")
+options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
+options.add_argument('--profile-directory=Profile 3')
+# options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
+# options.add_argument('--profile-directory=Profile 8')
+# options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=options)
 
 #launch URL
@@ -59,6 +59,7 @@ print(str(len(theList)) + ' Open Jobs Found')
 #START LOOP
 for i in theList:
     #copy button
+    time.sleep(2)
     copyButton = driver.find_element(By.XPATH, '//*[@id="md_pageTitle"]/a[2]')
     copyButton.click()
 
