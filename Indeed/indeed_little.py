@@ -129,8 +129,8 @@ for row in rows:
     nextButton.click()
     #next again 2
     time.sleep(2)
-    hireOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(1) select > option:nth-child(2)'))).click()
-    hireTwo = driver.find_element(By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(2) select > option:nth-child(4)').click()
+    # hireOne = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(1) select > option:nth-child(2)'))).click()
+    # hireTwo = driver.find_element(By.CSS_SELECTOR, 'form > div > div > div:nth-child(3) > div > div:nth-child(2) select > option:nth-child(4)').click()
     nextButton2 = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-root"]/div[3]/main/div/form/div/div[5]/div/div/div/div[2]/div[2]/button')))
     nextButton2.click()
     #next again 3
