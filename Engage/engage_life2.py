@@ -1,4 +1,4 @@
-### Updated 6/14/2022 
+### Updated 7/12/2022 
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,7 +17,7 @@ os.chdir(os.path.dirname(__file__))
 path = os.getcwd()
 
 # log file path
-logPath = os.path.join(path, "../Logs/engage_little.log")
+logPath = os.path.join(path, "../Logs/engage_life2.log")
 # logging config 
 logging.basicConfig(
     level=logging.INFO,
@@ -42,7 +42,7 @@ sys.stderr = LoggerWriter(log.error)
 # chrome options 
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 2')
+options.add_argument('--profile-directory=Profile 3')
 # options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 # options.add_argument('--profile-directory=Profile 9')
 # options.add_argument("start-maximized")
