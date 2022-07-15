@@ -41,7 +41,7 @@ sys.stderr = LoggerWriter(log.error)
 #chrome options
 options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=C:\\Users\\kokoku\\AppData\\Local\\Google\\Chrome\\User Data')
-options.add_argument('--profile-directory=Profile 2')
+options.add_argument('--profile-directory=Profile 3')
 #options.add_argument('--user-data-dir=C:\\Users\\yamanaka\\AppData\\Local\\Google\\Chrome\\User Data')
 #options.add_argument('--profile-directory=Profile 9')
 #options.add_argument("start-maximized")
